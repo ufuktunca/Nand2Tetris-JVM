@@ -21,8 +21,6 @@ export class Points {
     return Points.instance;
   }
 
-  public test() {}
-
   public push(variableName: string) {
     this.points.set(variableName, this.points.get(variableName) + 1);
   }

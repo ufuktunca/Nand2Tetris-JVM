@@ -1,11 +1,10 @@
-//var assert = require('assert');
 import { Points } from "./points";
 import assert from "assert";
 
-describe("Given RAM pointers", function () {
+describe("Given RAM pointers", () => {
   const points = Points.getInstance();
-  context("When I call them with their names", function () {
-    it("Then should return their initial positions", function () {
+  context("When I call them with their names", () => {
+    it("Then should return their initial positions", () => {
       assert.equal(points.getVariable("stack"), 256);
       assert.equal(points.getVariable("staticVariables"), 16);
       assert.equal(points.getVariable("temp"), 5);
@@ -17,8 +16,8 @@ describe("Given RAM pointers", function () {
       assert.equal(points.getVariable("THAT"), 4);
     });
   });
-  context("When I calling push function", function () {
-    before(function () {
+  context("When I calling push function", () => {
+    before(() => {
       points.push("stack");
       points.push("staticVariables");
       points.push("temp");
@@ -29,7 +28,7 @@ describe("Given RAM pointers", function () {
       points.push("THIS");
       points.push("THAT");
     });
-    it("Then pointers number should increase 1", function () {
+    it("Then pointers number should increase 1", () => {
       assert.equal(points.getVariable("stack"), 257);
       assert.equal(points.getVariable("staticVariables"), 17);
       assert.equal(points.getVariable("temp"), 6);
