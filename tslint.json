@@ -20,5 +20,5 @@
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
     }
   },
-  "rulesDirectory": ["./points", "./node_modules"]
+  "rulesDirectory": ["./src"]
 }

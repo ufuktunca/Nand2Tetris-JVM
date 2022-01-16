@@ -1,4 +1,4 @@
-import { Points } from "./points";
+import { Points } from "../points/points";
 import assert from "assert";
 
 describe("Given RAM pointers", () => {
