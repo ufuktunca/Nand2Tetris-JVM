@@ -1,4 +1,4 @@
-import { Points } from "../points/points";
+import { Points } from "../utils/points";
 import assert from "assert";
 
 describe("Given RAM pointers", () => {
@@ -22,17 +22,34 @@ describe("Given RAM pointers", () => {
       points.push("staticVariables");
       points.push("temp");
       points.push("generalPurpose");
-      points.push("SP");
-      points.push("LCL");
-      points.push("ARG");
-      points.push("THIS");
-      points.push("THAT");
     });
     it("Then pointers number should increase 1", () => {
       assert.equal(points.getVariable("stack"), 257);
       assert.equal(points.getVariable("staticVariables"), 17);
       assert.equal(points.getVariable("temp"), 6);
       assert.equal(points.getVariable("generalPurpose"), 14);
+    });
+  });
+  context("When I calling pop function", () => {
+    before(() => {
+      points.push("stack");
+      points.push("staticVariables");
+      points.push("temp");
+      points.push("generalPurpose");
+      points.push("stack");
+      points.push("staticVariables");
+      points.push("temp");
+      points.push("generalPurpose");
+      points.pop("stack");
+      points.pop("staticVariables");
+      points.pop("temp");
+      points.pop("generalPurpose");
+    });
+    it("Then pointers number should increase 1", () => {
+      assert.equal(points.getVariable("stack"), 258);
+      assert.equal(points.getVariable("staticVariables"), 18);
+      assert.equal(points.getVariable("temp"), 7);
+      assert.equal(points.getVariable("generalPurpose"), 15);
     });
   });
 });

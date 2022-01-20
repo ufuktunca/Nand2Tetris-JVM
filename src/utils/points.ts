@@ -28,4 +28,8 @@ export class Points {
   public getVariable(variableName: string): number {
     return this.points.get(variableName);
   }
+
+  public pop(variableName: string) {
+    this.points.set(variableName, this.points.get(variableName) - 1);
+  }
 }
