@@ -10,4 +10,10 @@ export class Memory {
         M=M+1
         `;
   }
+
+  decide(line: string): string {
+    if (line.includes("push")) {
+      return this.push(parseInt(line.split(" ")[1], 10));
+    }
+  }
 }

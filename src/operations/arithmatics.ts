@@ -10,4 +10,10 @@ export class Arithmatics {
       M=M-1
       `;
   }
+
+  calculate(line: string): string {
+    if (line.includes("add")) {
+      return this.add();
+    }
+  }
 }
