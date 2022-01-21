@@ -10,10 +10,15 @@ export function readFile(fileLocation: string): string[] {
 
     for (const i of arr) {
       if (i.split("//")[0].trim().length > 0) {
-        console.log("");
         lines.push(i.split("//")[0].trim());
       }
     }
   });
   return lines;
+}
+
+export function writeFile(content: string, fileName: string) {
+  fs.writeFile(fileName, content, (err) => {
+    return err;
+  });
 }

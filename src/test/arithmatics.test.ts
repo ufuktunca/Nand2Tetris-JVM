@@ -1,4 +1,4 @@
-import { readFile } from "../utils/fileReader";
+import { readFile } from "../utils/file";
 import assert from "assert";
 import { Arithmatics } from "../operations/arithmatics";
 
