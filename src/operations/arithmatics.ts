@@ -1,14 +1,6 @@
 export class Arithmatics {
   add(): string {
-    return `
-      @0
-      A=M
-      D=M
-      A=A-1
-      M=M+D
-      @0
-      M=M-1
-      `;
+    return `@0\nA=M\nD=M\nA=A-1\nM=M+D\n@0\nM=M-1`;
   }
 
   calculate(line: string): string {

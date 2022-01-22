@@ -1,20 +1,19 @@
 import { readFile, writeFile } from "../utils/file";
 import fs from "fs";
 import assert from "assert";
+import { waitForDebugger } from "inspector";
 
 describe("Given file reader function", () => {
   it("When I read a test file", (done) => {
     let lines = [];
-    before((done) => {
+    before(() => {
       lines = readFile("./src/test/test-file.vm");
-      done();
     });
-    it("Then should return file lines without comments", (done) => {
+    it("Then should return file lines without comments", () => {
       assert.equal(lines.length, 3);
       assert.equal(lines[0], "push constant 7");
       assert.equal(lines[1], "push constant 8");
       assert.equal(lines[2], "add");
-      done();
     });
     done();
   });
@@ -23,13 +22,15 @@ describe("Given file reader function", () => {
 describe("Given write file function", () => {
   context("When I write a test file", () => {
     let lines = [];
-    before((done) => {
+    before(() => {
       writeFile(
         "test\ntest1\n2341235\nend-line",
         "./src/test/created-test-file.asm"
       );
+    });
+
+    beforeEach(() => {
       lines = readFile("./src/test/created-test-file.asm");
-      done();
     });
 
     it("Then file should be created", (done) => {
@@ -44,10 +45,9 @@ describe("Given write file function", () => {
       assert.equal(lines[3], "end-line");
       done();
     });
-    after(() => {
-      fs.unlink("./src/test/created-test-file.asm", (err) => {
-        return err;
-      });
+    after((done) => {
+      fs.unlinkSync("./src/test/created-test-file.asm");
+      done();
     });
   });
 });
