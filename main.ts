@@ -8,4 +8,4 @@ for (const line of lines) {
   assembly += operations(line);
 }
 
-writeFile(assembly, "result.asm");
+writeFile(assembly, "SimpleAdd.asm");
