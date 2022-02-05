@@ -25,7 +25,16 @@ describe("Given want to decide operation", () => {
     it("Then should eq operation in assembly language", () => {
       assert.equal(
         result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D+M\n@TRUE\nD;JGE\n@FALSE\n(TRUE)\nM=1\n@INCREASE-ADDRESS\n(FALSE)\nM=-1\n(INCREASE-ADDRESS)\n@0\nM=M+1\n`
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-1\nD;JEQ\n@FALSE-1\n0;JMP\n(TRUE-1)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-1\n0;JMP\n(FALSE-1)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-1)\n@0\nM=M+1\n`
+      );
+    });
+  });
+  context("When I call the eq second time iteration number should be increase", () => {
+    const result = arithmatics.calculate("eq");
+    it("Then should return eq operation in assembly language with iteration number 2", () => {
+      assert.equal(
+        result,
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-2\nD;JEQ\n@FALSE-2\n0;JMP\n(TRUE-2)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-2\n0;JMP\n(FALSE-2)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-2)\n@0\nM=M+1\n`
       );
     });
   });
