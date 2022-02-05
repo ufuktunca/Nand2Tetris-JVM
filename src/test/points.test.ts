@@ -13,7 +13,7 @@ describe("Given RAM pointers", () => {
       assert.equal(points.getVariable("LCL"), 1);
       assert.equal(points.getVariable("ARG"), 2);
       assert.equal(points.getVariable("THIS"), 3);
-      assert.equal(points.getVariable("THAT"), 3);
+      assert.equal(points.getVariable("THAT"), 4);
     });
   });
   context("When I calling push function", () => {
