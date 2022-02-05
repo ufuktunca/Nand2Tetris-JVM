@@ -38,4 +38,13 @@ describe("Given want to decide operation", () => {
       );
     });
   });
+  context("When I call calculate function with lt", () => {
+    const result = arithmatics.calculate("lt");
+    it("Then should return lt should return in assembly code", () => {
+      assert.equal(
+        result,
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-3\nD;JGT\n@FALSE-3\n0;JMP\n(TRUE-3)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-3\n0;JMP\n(FALSE-3)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-3)\n@0\nM=M+1\n`
+      );
+    });
+  });
 });

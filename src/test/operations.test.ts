@@ -23,4 +23,13 @@ describe("Given want I decide to operation", () => {
       );
     });
   });
+  context("When calling operation function with lt", () => {
+    const result = operations("lt");
+    it("Then should return lt assembly code", () => {
+      assert.equal(
+        result,
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-2\nD;JGT\n@FALSE-2\n0;JMP\n(TRUE-2)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-2\n0;JMP\n(FALSE-2)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-2)\n@0\nM=M+1\n`
+      );
+    });
+  });
 });
