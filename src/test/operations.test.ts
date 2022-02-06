@@ -41,4 +41,25 @@ describe("Given want I decide to operation", () => {
       );
     });
   });
+  context("When calling operation function with sub", () => {
+    const result = operations("sub");
+    it("Then should return add assembly code", () => {
+      assert.equal(result, `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=M-D\n@0\nM=M-1\n`);
+    });
+  });
+  context("When calling operation function with ", () => {
+    const result = operations("neg");
+    it("Then should return add assembly code", () => {
+      assert.equal(result, `@0\nA=M\nA=A-1\nM=-M\n`);
+    });
+  });
+  context("When calling operation function with and", () => {
+    const result = operations("and");
+    it("Then should return and assembly code", () => {
+      assert.equal(
+        result,
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D+M\nD=D-1\nD=D-1\n@0\nM=M-1\nM=M-1\n@TRUE-4\nD;JEQ\n@FALSE-4\n0;JMP\n(TRUE-4)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-4\n0;JMP\n(FALSE-4)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-4)\n@0\nM=M+1\n`
+      );
+    });
+  });
 });

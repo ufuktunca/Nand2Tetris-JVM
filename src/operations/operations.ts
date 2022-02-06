@@ -14,7 +14,7 @@ export function operations(line: string): string {
 }
 
 function arithmaticOperation(line: string): boolean {
-  return line.includes("add") || line.includes("eq") || line.includes("lt") || line.includes("gt")
+  return line.includes("add") || line.includes("eq") || line.includes("lt") || line.includes("gt") || line.includes("sub") || line.includes("neg") || line.includes("and")
 }
 
 function memoryOperation(line: string): boolean {
