@@ -14,3 +14,8 @@ repos:
     hooks:
     -   id: tslint
         args: ['--project','tsconfig.testing.json','--type-check']
+-   repo: git://github.com/ufuktunca/pre-commit-mocha/
+    rev: ''  # Use the sha or tag you want to point at
+    hooks:
+    -   id: mocha
+        args: ['env TS_NODE_PROJECT=\"tsconfig.testing.json\"', 'mocha','--parallel' ,'--require', 'ts-node/register "src/test/**/*.ts"']
