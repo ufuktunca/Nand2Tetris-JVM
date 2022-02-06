@@ -1,21 +1,16 @@
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v4.1.0
     hooks:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
 -   repo: https://github.com/psf/black
-    rev: 21.12b0
+    rev: 22.1.0
     hooks:
     -   id: black
 -   repo: git://github.com/awebdeveloper/pre-commit-tslint/
-    rev: ''  # Use the sha or tag you want to point at
+    rev: '0.0.2'  # Use the sha or tag you want to point at
     hooks:
     -   id: tslint
         args: ['--project','tsconfig.testing.json','--type-check']
--   repo: git://github.com/ufuktunca/pre-commit-mocha/
-    rev: ''  # Use the sha or tag you want to point at
-    hooks:
-    -   id: mocha
-        args: ['env TS_NODE_PROJECT=\"tsconfig.testing.json\"', 'mocha','--parallel' ,'--require', 'ts-node/register "src/test/**/*.ts"']
