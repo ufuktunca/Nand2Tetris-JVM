@@ -47,4 +47,13 @@ describe("Given want to decide operation", () => {
       );
     });
   });
+  context("When I call calculate function with gt", () => {
+    const result = arithmatics.calculate("gt");
+    it("Then should return lt should return in assembly code", () => {
+      assert.equal(
+        result,
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-4\nD;JLT\n@FALSE-4\n0;JMP\n(TRUE-4)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-4\n0;JMP\n(FALSE-4)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-4)\n@0\nM=M+1\n`
+      );
+    });
+  });
 });
