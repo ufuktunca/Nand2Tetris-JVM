@@ -25,7 +25,7 @@ describe("Given want to decide operation", () => {
     it("Then should eq operation in assembly language", () => {
       assert.equal(
         result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-1\nD;JEQ\n@FALSE-1\n0;JMP\n(TRUE-1)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-1\n0;JMP\n(FALSE-1)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-1)\n@0\nM=M+1\n`
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-1\nD;JEQ\n@FALSE-1\n0;JMP\n(TRUE-1)\n@0\nA=M\nM=-1\n@INCREASE-ADDRESS-1\n0;JMP\n(FALSE-1)\n@0\nA=M\nM=0\n(INCREASE-ADDRESS-1)\n@0\nM=M+1\n`
       );
     });
   });
@@ -34,7 +34,7 @@ describe("Given want to decide operation", () => {
     it("Then should return eq operation in assembly language with iteration number 2", () => {
       assert.equal(
         result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-2\nD;JEQ\n@FALSE-2\n0;JMP\n(TRUE-2)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-2\n0;JMP\n(FALSE-2)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-2)\n@0\nM=M+1\n`
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-2\nD;JEQ\n@FALSE-2\n0;JMP\n(TRUE-2)\n@0\nA=M\nM=-1\n@INCREASE-ADDRESS-2\n0;JMP\n(FALSE-2)\n@0\nA=M\nM=0\n(INCREASE-ADDRESS-2)\n@0\nM=M+1\n`
       );
     });
   });
@@ -43,7 +43,7 @@ describe("Given want to decide operation", () => {
     it("Then should return lt should return in assembly code", () => {
       assert.equal(
         result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-3\nD;JGT\n@FALSE-3\n0;JMP\n(TRUE-3)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-3\n0;JMP\n(FALSE-3)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-3)\n@0\nM=M+1\n`
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-3\nD;JGT\n@FALSE-3\n0;JMP\n(TRUE-3)\n@0\nA=M\nM=-1\n@INCREASE-ADDRESS-3\n0;JMP\n(FALSE-3)\n@0\nA=M\nM=0\n(INCREASE-ADDRESS-3)\n@0\nM=M+1\n`
       );
     });
   });
@@ -52,7 +52,7 @@ describe("Given want to decide operation", () => {
     it("Then should return gt should return in assembly code", () => {
       assert.equal(
         result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-4\nD;JLT\n@FALSE-4\n0;JMP\n(TRUE-4)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-4\n0;JMP\n(FALSE-4)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-4)\n@0\nM=M+1\n`
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-4\nD;JLT\n@FALSE-4\n0;JMP\n(TRUE-4)\n@0\nA=M\nM=-1\n@INCREASE-ADDRESS-4\n0;JMP\n(FALSE-4)\n@0\nA=M\nM=0\n(INCREASE-ADDRESS-4)\n@0\nM=M+1\n`
       );
     });
   });
@@ -70,10 +70,28 @@ describe("Given want to decide operation", () => {
   });
   context("When I call calculate function with and", () => {
     const result = arithmatics.calculate("and");
-    it("Then should return and should return in assembly code", () => {
+    it("Then should return and in assembly code", () => {
       assert.equal(
         result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D+M\nD=D-1\nD=D-1\n@0\nM=M-1\nM=M-1\n@TRUE-5\nD;JEQ\n@FALSE-5\n0;JMP\n(TRUE-5)\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-5\n0;JMP\n(FALSE-5)\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-5)\n@0\nM=M+1\n`
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D&M\n@0\nM=M-1\n`
+      );
+    });
+  });
+  context("When I call calculate function with or", () => {
+    const result = arithmatics.calculate("or");
+    it("Then or should return in assembly code", () => {
+      assert.equal(
+        result,
+        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D|M\n@0\nM=M-1\n`
+      );
+    });
+  });
+  context("When I call calculate function with not", () => {
+    const result = arithmatics.calculate("not");
+    it("Then not should return in assembly code", () => {
+      assert.equal(
+        result,
+        `@0\nA=M\nA=A-1\nM=!M\n`
       );
     });
   });

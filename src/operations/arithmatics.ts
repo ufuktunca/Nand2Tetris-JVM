@@ -13,15 +13,15 @@ export class Arithmatics {
   }
 
   eq(): string {
-    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-${this.iteration}\nD;JEQ\n@FALSE-${this.iteration}\n0;JMP\n(TRUE-${this.iteration})\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-${this.iteration}\n0;JMP\n(FALSE-${this.iteration})\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-${this.iteration})\n@0\nM=M+1\n`;
+    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-${this.iteration}\nD;JEQ\n@FALSE-${this.iteration}\n0;JMP\n(TRUE-${this.iteration})\n@0\nA=M\nM=-1\n@INCREASE-ADDRESS-${this.iteration}\n0;JMP\n(FALSE-${this.iteration})\n@0\nA=M\nM=0\n(INCREASE-ADDRESS-${this.iteration})\n@0\nM=M+1\n`;
   }
 
   lt():string{
-    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-${this.iteration}\nD;JGT\n@FALSE-${this.iteration}\n0;JMP\n(TRUE-${this.iteration})\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-${this.iteration}\n0;JMP\n(FALSE-${this.iteration})\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-${this.iteration})\n@0\nM=M+1\n`
+    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-${this.iteration}\nD;JGT\n@FALSE-${this.iteration}\n0;JMP\n(TRUE-${this.iteration})\n@0\nA=M\nM=-1\n@INCREASE-ADDRESS-${this.iteration}\n0;JMP\n(FALSE-${this.iteration})\n@0\nA=M\nM=0\n(INCREASE-ADDRESS-${this.iteration})\n@0\nM=M+1\n`
   }
 
   gt():string{
-    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-${this.iteration}\nD;JLT\n@FALSE-${this.iteration}\n0;JMP\n(TRUE-${this.iteration})\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-${this.iteration}\n0;JMP\n(FALSE-${this.iteration})\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-${this.iteration})\n@0\nM=M+1\n`
+    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D-M\n@0\nM=M-1\nM=M-1\n@TRUE-${this.iteration}\nD;JLT\n@FALSE-${this.iteration}\n0;JMP\n(TRUE-${this.iteration})\n@0\nA=M\nM=-1\n@INCREASE-ADDRESS-${this.iteration}\n0;JMP\n(FALSE-${this.iteration})\n@0\nA=M\nM=0\n(INCREASE-ADDRESS-${this.iteration})\n@0\nM=M+1\n`
   }
 
   neg():string{
@@ -29,7 +29,15 @@ export class Arithmatics {
   }
 
   and():string{
-    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nD=D+M\nD=D-1\nD=D-1\n@0\nM=M-1\nM=M-1\n@TRUE-${this.iteration}\nD;JEQ\n@FALSE-${this.iteration}\n0;JMP\n(TRUE-${this.iteration})\n@0\nA=M\nM=1\n@INCREASE-ADDRESS-${this.iteration}\n0;JMP\n(FALSE-${this.iteration})\n@0\nA=M\nM=-1\n(INCREASE-ADDRESS-${this.iteration})\n@0\nM=M+1\n`
+    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D&M\n@0\nM=M-1\n`
+  }
+
+  or():string{
+    return `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D|M\n@0\nM=M-1\n`
+  }
+
+  not():string{
+    return `@0\nA=M\nA=A-1\nM=!M\n`
   }
 
   calculate(line: string): string {
@@ -61,8 +69,15 @@ export class Arithmatics {
     }
 
     if (line.includes("and")) {
-      this.iteration += 1
       return this.and()
+    }
+
+    if (line.includes("or")) {
+      return this.or()
+    }
+
+    if (line.includes("not")) {
+      return this.not()
     }
   }
 }
