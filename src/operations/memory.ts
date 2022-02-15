@@ -8,12 +8,14 @@ export class Memory {
   }
 
   decide(line: string): string {
+    const parsedLocation = parseInt(line.split(" ")[2], 10)
+
     if (line.includes("constant")) {
-      return this.constant(parseInt(line.split(" ")[2], 10));
+      return this.constant(parsedLocation);
     }
 
     if (line.includes("local")) {
-      return this.local(parseInt(line.split(" ")[2], 10));
+      return this.local(parsedLocation);
     }
   }
 }
