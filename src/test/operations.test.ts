@@ -3,7 +3,7 @@ import { operations } from "../operations/operations";
 
 describe("Given want I decide to operation", () => {
   context("When calling operation function with push", () => {
-    const result = operations("push constants 15");
+    const result = operations("push constant 15");
     it("Then should return push assembly code", () => {
       assert.equal(result, `@${15}\nD=A\n@0\nA=M\nM=D\n@0\nM=M+1\n`);
     });
@@ -77,6 +77,15 @@ describe("Given want I decide to operation", () => {
       assert.equal(
         result,
         `@0\nA=M\nA=A-1\nM=!M\n`
+      );
+    });
+  });
+  context("When calling operation function with local", () => {
+    const result = operations("push local 29");
+    it("Then should return not assembly code", () => {
+      assert.equal(
+        result,
+        `@29\nD=A\n@1\nA=M\nM=D\n@1\nM=M+1\n`
       );
     });
   });

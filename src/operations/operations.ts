@@ -18,5 +18,5 @@ function arithmaticOperation(line: string): boolean {
 }
 
 function memoryOperation(line: string): boolean {
-  return line.includes("push");
+  return line.includes("constant") || line.includes("local");
 }
