@@ -14,9 +14,23 @@ export function operations(line: string): string {
 }
 
 function arithmaticOperation(line: string): boolean {
-  return line.includes("add") || line.includes("eq") || line.includes("lt") || line.includes("gt") || line.includes("sub") || line.includes("neg") || line.includes("and") || line.includes("or") || line.includes("not")
+  return (
+    line.includes("add") ||
+    line.includes("eq") ||
+    line.includes("lt") ||
+    line.includes("gt") ||
+    line.includes("sub") ||
+    line.includes("neg") ||
+    line.includes("and") ||
+    line.includes("or") ||
+    line.includes("not")
+  );
 }
 
 function memoryOperation(line: string): boolean {
-  return line.includes("constant") || line.includes("local");
+  return (
+    line.includes("constant") ||
+    line.includes("local") ||
+    line.includes("argument")
+  );
 }

@@ -1,7 +1,9 @@
 import assert from "assert";
 import { operations } from "../operations/operations";
+import { Points } from "../utils/points";
 
 describe("Given want I decide to operation", () => {
+  const points = Points.getInstance();
   context("When calling operation function with push", () => {
     const result = operations("push constant 15");
     it("Then should return push assembly code", () => {
@@ -56,37 +58,43 @@ describe("Given want I decide to operation", () => {
   context("When calling operation function with and", () => {
     const result = operations("and");
     it("Then should return and assembly code", () => {
-      assert.equal(
-        result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D&M\n@0\nM=M-1\n`
-      );
+      assert.equal(result, `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D&M\n@0\nM=M-1\n`);
     });
   });
   context("When calling operation function with or", () => {
     const result = operations("or");
     it("Then should return or assembly code", () => {
-      assert.equal(
-        result,
-        `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D|M\n@0\nM=M-1\n`
-      );
+      assert.equal(result, `@0\nA=M\nA=A-1\nD=M\nA=A-1\nM=D|M\n@0\nM=M-1\n`);
     });
   });
   context("When calling operation function with not", () => {
     const result = operations("not");
     it("Then should return not assembly code", () => {
+      assert.equal(result, `@0\nA=M\nA=A-1\nM=!M\n`);
+    });
+  });
+  context("When calling operation function with local", () => {
+    const result = operations("push local 5");
+    it("Then should return push local assembly code", () => {
       assert.equal(
         result,
-        `@0\nA=M\nA=A-1\nM=!M\n`
+        `@${points.getVariable("LCL")}\nA=M+5\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`
       );
     });
   });
   context("When calling operation function with local", () => {
-    const result = operations("push local 29");
-    it("Then should return not assembly code", () => {
+    const result = operations("pop local 7");
+    it("Then should return pop local assembly code", () => {
       assert.equal(
         result,
-        `@29\nD=A\n@1\nA=M\nM=D\n@1\nM=M+1\n`
+        `@0\nM=M-1\nA=M\nD=M\n@${points.getVariable("LCL")}\nA=M+7\nM=D\n`
       );
+    });
+  });
+  context("When calling operation function with argument", () => {
+    const result = operations("push argument 33");
+    it("Then should return push argument assembly code", () => {
+      assert.equal(result, `@33\nD=A\n@2\nA=M\nM=D\n@2\nM=M+1\n`);
     });
   });
 });
