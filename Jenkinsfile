@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        image "node:6-alpine"
+    }
 
     stages {
         stage ("Build"){
