@@ -94,7 +94,10 @@ describe("Given want I decide to operation", () => {
   context("When calling operation function with argument", () => {
     const result = operations("push argument 33");
     it("Then should return push argument assembly code", () => {
-      assert.equal(result, `@33\nD=A\n@2\nA=M\nM=D\n@2\nM=M+1\n`);
+      assert.equal(
+        result,
+        `@${points.getVariable("ARG")}\nA=M+33\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`
+      );
     });
   });
 });
