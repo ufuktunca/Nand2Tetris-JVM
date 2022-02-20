@@ -8,9 +8,8 @@ export function operations(line: string): string {
   if (arithmaticOperation(line)) {
     return arithmatics.calculate(line);
   }
-  if (memoryOperation(line)) {
-    return memory.decide(line);
-  }
+
+  return memory.decide(line);
 }
 
 function arithmaticOperation(line: string): boolean {

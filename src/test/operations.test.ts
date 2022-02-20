@@ -76,28 +76,25 @@ describe("Given want I decide to operation", () => {
   context("When calling operation function with local", () => {
     const result = operations("push local 5");
     it("Then should return push local assembly code", () => {
-      assert.equal(
-        result,
-        `@${points.getVariable("LCL")}\nA=M+5\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`
-      );
+      assert.equal(result, `@${300 + 5}\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`);
     });
   });
   context("When calling operation function with local", () => {
     const result = operations("pop local 7");
     it("Then should return pop local assembly code", () => {
-      assert.equal(
-        result,
-        `@0\nM=M-1\nA=M\nD=M\n@${points.getVariable("LCL")}\nA=M+7\nM=D\n`
-      );
+      assert.equal(result, `@0\nM=M-1\nA=M\nD=M\n@${300 + 7}\nM=D\n`);
     });
   });
   context("When calling operation function with argument", () => {
     const result = operations("push argument 33");
     it("Then should return push argument assembly code", () => {
-      assert.equal(
-        result,
-        `@${points.getVariable("ARG")}\nA=M+33\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`
-      );
+      assert.equal(result, `@${400 + 33}\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`);
+    });
+  });
+  context("When calling operation function with argument", () => {
+    const result = operations("pop argument 3");
+    it("Then should return push argument assembly code", () => {
+      assert.equal(result, `@0\nM=M-1\nA=M\nD=M\n@${400 + 3}\nM=D\n`);
     });
   });
 });

@@ -6,10 +6,10 @@ export class Points {
     ["temp", 5],
     ["generalPurpose", 13],
     ["SP", 0],
-    ["LCL", 1],
-    ["ARG", 2],
-    ["THIS", 3],
-    ["THAT", 4],
+    ["local", 300],
+    ["argument", 400],
+    ["this", 3000],
+    ["that", 3010],
   ]);
 
   private constructor() {}

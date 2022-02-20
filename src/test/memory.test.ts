@@ -23,7 +23,7 @@ describe("Given want to make push operation", () => {
     context(
       "Then should push operation in assembly language with number push local 4",
       () => {
-        assert.equal(result, `@1\nA=M+4\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`);
+        assert.equal(result, `@${300 + 4}\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`);
       }
     );
   });
@@ -32,7 +32,7 @@ describe("Given want to make push operation", () => {
     context(
       "Then should push operation in assembly language with number pop local 10",
       () => {
-        assert.equal(result, `@0\nM=M-1\nA=M\nD=M\n@1\nA=M+10\nM=D\n`);
+        assert.equal(result, `@0\nM=M-1\nA=M\nD=M\n@${300 + 10}\nM=D\n`);
       }
     );
   });
@@ -41,7 +41,16 @@ describe("Given want to make push operation", () => {
     context(
       "Then should push operation in assembly language with number push local 90",
       () => {
-        assert.equal(result, `@54\nD=A\n@2\nA=M\nM=D\n@2\nM=M+1\n`);
+        assert.equal(result, `@${400 + 54}\nD=M\n@0\nA=M\nM=D\n@0\nM=M+1\n`);
+      }
+    );
+  });
+  it("When deciding operation type with 'pop argument 25'", () => {
+    const result = memory.decide("pop argument 25");
+    context(
+      "Then should push operation in assembly language with number push local 90",
+      () => {
+        assert.equal(result, `@0\nM=M-1\nA=M\nD=M\n@${400 + 25}\nM=D\n`);
       }
     );
   });
