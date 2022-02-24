@@ -1,11 +1,10 @@
 pipeline {
-    tools {
-    nodejs 'default-nodejs'
-  }
+    agent any
 
     stages {
         stage ("Build"){
             steps {
+                sh "node -v"
                 sh "npm install"
             }
         }
