@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo npm -g config set user root'
+                sh 'chown -R 1001:0 "/.npm"'
                 sh 'npm install'
                 sh 'npm run test'
             }
