@@ -1,11 +1,13 @@
 pipeline {
-    agent any
-
+    agent{
         docker {
         image 'node:15-alpine'
         args '-u root:root'
         reuseNode true
     }
+    }
+
+        
     stages {
         stage('Build') {
             steps {
