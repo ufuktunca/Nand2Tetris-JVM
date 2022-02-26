@@ -1,10 +1,6 @@
 pipeline {
     agent{
-        docker {
-        image 'node:15-alpine'
-        args '-u root:root'
-        reuseNode true
-    }
+        docker 'node:15-alpine'
     }
 
         
