@@ -1,16 +1,25 @@
-pipeline {
-    agent{
-        docker 'node:15-alpine'
-    }
+// Jenkinsfile
 
-        
-    stages {
-        stage('Build') {
-            steps {
-//                sh 'rm -rf /bitnami/jenkins/home/workspace/JVM/node_modules'
-                sh 'npm install'
-                sh 'npm run test'
-            }
+pipeline {
+  // Assign to docker slave(s) label, could also be 'any'
+  agent {
+    label 'docker' 
+  }
+
+  stages {
+    stage('Docker node test') {
+      agent {
+        docker {
+          // Set both label and image
+          label 'docker'
+          image 'node:7-alpine'
+          args '--name docker-node' // list any args
         }
+      }
+      steps {
+        // Steps run in node:7-alpine docker container on docker slave
+        sh 'node --version'
+      }
     }
+  }
 }
