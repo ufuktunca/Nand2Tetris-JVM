@@ -14,7 +14,7 @@ describe("Given want to make push operation", () => {
     context(
       "Then should push operation in assembly language with number 6",
       () => {
-        assert.equal(result, `@${6}\nD=A\n@sdfasfasasas0\nA=M\nM=D\n@0\nM=M+1\n`);
+        assert.equal(result, `@${6}\nD=A\n@sdfasfasas0\nA=M\nM=D\n@0\nM=M+1\n`);
       }
     );
   });
