@@ -15,6 +15,6 @@ repos:
     -   id: tslint
         args: ['--project','tsconfig.testing.json','--type-check']
 -   repo: https://github.com/ufuktunca/pre-commit-mocha.git
-    rev: 'v0.0.1'  # Use the sha or tag you want to point at
+    rev: '7b1a416ee54f3ace9f8c207371a4cdbd266f2acd'  # Use the sha or tag you want to point at
     hooks:
     -   id: mocha-test
